@@ -1,4 +1,7 @@
+"use client";
+
 import { FC } from "react";
+import { useRouter } from "next/navigation";
 
 // Libs
 import { cn } from "@/lib/utils";
@@ -13,6 +16,8 @@ interface HeroSectionProps {
 }
 
 const HeroSection: FC<HeroSectionProps> = ({ className = "" }) => {
+  const router = useRouter();
+
   return (
     <section className={cn(className, "min-h-screen bg-primary relative")}>
       <div className="w-[1000px] h-[400px] absolute bottom-0 left-[50%] transform translate-x-[-50%]">
@@ -34,7 +39,14 @@ const HeroSection: FC<HeroSectionProps> = ({ className = "" }) => {
             manager today!
           </p>
           <div className="flex justify-center items-center gap-4">
-            <Button className="mt-[20px]" variant="dark" size="lg">
+            <Button
+              onClick={() => {
+                router.push("/sign-in");
+              }}
+              className="mt-[20px]"
+              variant="dark"
+              size="lg"
+            >
               Get Started
             </Button>
             <Button className="mt-[20px]" variant="outline" size="lg">
