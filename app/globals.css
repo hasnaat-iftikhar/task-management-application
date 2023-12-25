@@ -76,7 +76,9 @@
 }
 
 /* Clerk */
-.cl-internal-b3fm6y {
+.cl-internal-b3fm6y,
+.cl-userButtonPopoverFooter,
+.cl-organizationSwitcherPopoverFooter {
   display: none;
 }
 
