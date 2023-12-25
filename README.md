@@ -1,3 +1,5 @@
+![image](https://github.com/hasnaat-iftikhar/task-management-application/assets/97826292/62da2435-0c1b-4e63-9320-b7a606f5c5de)
+
 ## Task Management Application | Trello Alternative
 
 A lightweight Trello clone for streamlined task management.
