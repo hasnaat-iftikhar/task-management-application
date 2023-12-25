@@ -23,7 +23,7 @@ Backend technologies
 ```bash
 Authentication
 --------------
-- Not implemented yet
+- Clerk
 ```
 
 ```bash
