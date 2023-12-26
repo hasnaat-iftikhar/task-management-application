@@ -86,3 +86,8 @@
 .cl-internal-1fsg6zy {
   background: hsl(var(--primary));
 }
+
+/* Clerk - Avatar box */
+.cl-internal-g6a67s:focus {
+  border-radius: 0.375rem;
+}

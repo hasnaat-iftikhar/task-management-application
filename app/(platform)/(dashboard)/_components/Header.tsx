@@ -34,8 +34,9 @@ const DashboardHeader = () => {
               appearance={{
                 elements: {
                   avatarBox: {
-                    width: 36,
-                    height: 36,
+                    width: 32,
+                    height: 32,
+                    borderRadius: "0.375rem",
                   },
                 },
               }}
