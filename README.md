@@ -1,4 +1,4 @@
-![image](https://github.com/hasnaat-iftikhar/task-management-application/assets/97826292/62da2435-0c1b-4e63-9320-b7a606f5c5de)
+![image](https://github.com/hasnaat-iftikhar/task-management-application/assets/97826292/23895f51-863f-4c70-a73c-c12d13a71399)
 
 ## Task Management Application | Trello Alternative
 
