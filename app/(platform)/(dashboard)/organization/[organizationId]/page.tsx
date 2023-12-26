@@ -1,7 +1,7 @@
 import React from "react";
 
-const OrganizationPage = () => {
+const ActiveOrganizationPage = () => {
   return <div>OrganizationPage</div>;
 };
 
-export default OrganizationPage;
+export default ActiveOrganizationPage;
