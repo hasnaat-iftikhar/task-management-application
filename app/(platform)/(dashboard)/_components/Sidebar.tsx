@@ -76,15 +76,24 @@ const DashboardSidebar: FC<DashboardSidebarProps> = ({
         type="multiple"
         defaultValue={defaultAccordionValue}
       >
-        {userMemberships.data?.map(({ organization }) => (
-          <SidebarItem
-            key={organization.id}
-            isActive={activeOrganization?.id === organization.id}
-            isExpanded={expanded[organization.id]}
-            organization={organization as Organization}
-            onExpand={onExpand}
-          />
-        ))}
+        {(!isLoadedOrg || !isLoadedOrgList || userMemberships.isLoading) ? (
+          <>
+            <SidebarItem.Skeleton />
+            <SidebarItem.Skeleton />
+            <SidebarItem.Skeleton />
+            <SidebarItem.Skeleton />
+          </>
+        ) : (
+          userMemberships.data?.map(({ organization }) => (
+            <SidebarItem
+              key={organization.id}
+              isActive={activeOrganization?.id === organization.id}
+              isExpanded={expanded[organization.id]}
+              organization={organization as Organization}
+              onExpand={onExpand}
+            />
+          ))
+        )}
       </Accordion>
     </div>
   );

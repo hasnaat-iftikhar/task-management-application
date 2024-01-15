@@ -13,6 +13,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/Accordion";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 // Types
 import { Organization } from "@/utils/types/Organization";
@@ -34,7 +35,11 @@ interface SidebarItemProps {
   onExpand: (id: string) => void;
 }
 
-const SidebarItem: FC<SidebarItemProps> = ({
+interface SidebarItemWithSkeletonProps extends FC<SidebarItemProps> {
+  Skeleton: FC;
+}
+
+const SidebarItem: SidebarItemWithSkeletonProps = ({
   className,
   isActive,
   isExpanded,
@@ -109,6 +114,17 @@ const SidebarItem: FC<SidebarItemProps> = ({
         ))}
       </AccordionContent>
     </AccordionItem>
+  );
+};
+
+SidebarItem.Skeleton = function SkeletonSidebarItem() {
+  return (
+    <div className="flex items-center gap-x-2">
+      <div className="w-[32px] h-[32px] relative shrink-0">
+        <Skeleton className="h-full w-full absolute" />
+      </div>
+      <Skeleton className="h-[32px] w-full" />
+    </div>
   );
 };
 
