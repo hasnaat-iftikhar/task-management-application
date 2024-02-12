@@ -17,7 +17,7 @@ Frontend technologies
 Backend technologies
 --------------------
 - Prisma (ORM)
-- MySQL DB
+- MySQL DB (Supabase)
 ```
 
 ```bash
