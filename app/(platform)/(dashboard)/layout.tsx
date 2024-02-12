@@ -3,7 +3,7 @@ import { FC, ReactNode } from "react";
 // Components
 import PlatformProvider from "@/components/shared/Provider";
 import DashboardHeader from "./_components/Header";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/Toaster";
 
 interface layoutProps {
   children: ReactNode;
