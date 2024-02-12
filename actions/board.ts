@@ -1,34 +1,67 @@
 "use server";
 
-import { db } from "@/lib/db";
-import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { revalidatePath } from "next/cache";
+import { FieldValues } from "react-hook-form";
 
-const CreateBoardValidation = z.object({
-    title: z.string()
-})
+// Libs
+import { db } from "@/lib/db";
+import {BoardFormValidator} from "@/lib/validation/boardForm";
+import { useOrganization } from "@clerk/nextjs";
 
-export async function CreateBoard(formData: FormData) {
-    const { title } = CreateBoardValidation.parse({
-        title: formData.get("title") as string
-    });
+export type State = {
+    error?: boolean;
+    success?: boolean;
+    status: "404" | "200";
+    message: string;
+    data?: {
+        id: string;
+        title: string
+    }
+}
 
-    await db.board.create({
-        data: {
-            title
+export async function CreateBoard(formData: FieldValues) {
+    try {
+        const {title} = BoardFormValidator.parse(formData);
+        
+        const createdBoard = await db.board.create({
+            data: {
+                title
+            }
+        });
+
+        const response: State = {
+            success: true,
+            status: "200",
+            message: "Board created successfully.",
+            data: createdBoard
         }
-    });
 
-    revalidatePath("/organization/org_2a2n6gM6c7QSJLGzcO1AO9XkjFE");
+        revalidatePath(`/board/${createdBoard.id}`)
+
+        return response;
+    } catch(error) {
+        if (error instanceof z.ZodError) {
+            const response: State = {
+                error: true,
+                status: "404",
+                message: error?.errors[0].message
+            }
+
+            return response;
+        }
+    }
 }
 
 export async function DeleteBoard(id: string) {
-    console.log("id", id)
+    const { organization: activeOrganization } =
+    useOrganization();
+
     await db.board.delete({
         where: {
             id
         }
     });
 
-    revalidatePath("/organization/org_2a2n6gM6c7QSJLGzcO1AO9XkjFE")
+    revalidatePath(`/organization/${activeOrganization?.id}`)
 }

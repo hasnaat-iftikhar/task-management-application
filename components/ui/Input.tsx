@@ -1,9 +1,9 @@
-import React, { FC, ChangeEvent } from 'react';
+import React, { FC, ChangeEvent, InputHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 type InputTypes = "text" | "password" | "number";
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     className?:string;
     label?: string;
     labelClassName?: string;
@@ -25,6 +25,7 @@ const Input: FC<InputProps> = ({
     placeholder,
     value,
     onChange,
+    ...rest
 }) => {
     return (
         <div className={`${className} w-full flex flex-col gap-[8px]`}>
@@ -40,6 +41,7 @@ const Input: FC<InputProps> = ({
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
+                {...rest}
             />
         </div>
     );
