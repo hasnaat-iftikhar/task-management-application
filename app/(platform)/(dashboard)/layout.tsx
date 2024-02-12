@@ -12,8 +12,10 @@ interface layoutProps {
 const layout: FC<layoutProps> = ({ children }) => {
   return (
     <PlatformProvider>
-      <DashboardHeader />
-      {children}
+      <main className="h-screen flex flex-col w-full">
+        <DashboardHeader />
+        {children}
+      </main>
       <Toaster />
     </PlatformProvider>
   );

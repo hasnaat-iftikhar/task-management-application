@@ -10,14 +10,13 @@ interface OrganizationLayoutProps {
 
 const OrganizationLayout: FC<OrganizationLayoutProps> = ({ children }) => {
   return (
-    <div>
-      <Container>
-        <div className="flex justify-between items-start gap-[20px]">
-          <DashboardSidebar className="max-w-[300px] mt-[20px]" />
-          <div className="flex-1 mt-[20px]">{children}</div>
-        </div>
-      </Container>
-    </div>
+    <Container className="h-full">
+      <div className="h-full flex justify-between items-start">
+        <DashboardSidebar className="max-w-[300px] mt-[20px] mr-[20px]" />
+        <div className="h-full w-[1px] bg-[#0000001a]" />
+        <div className="flex-1 mt-[20px]">{children}</div>
+      </div>
+    </Container>
   );
 };
 
