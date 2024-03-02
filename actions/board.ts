@@ -7,7 +7,6 @@ import { FieldValues } from "react-hook-form";
 // Libs
 import { db } from "@/lib/db";
 import {BoardFormValidator} from "@/lib/validation/boardForm";
-import { useOrganization } from "@clerk/nextjs";
 
 export type State = {
     error?: boolean;
@@ -23,12 +22,14 @@ export type State = {
 export async function CreateBoard(formData: FieldValues) {
     try {
         const {title} = BoardFormValidator.parse(formData);
-        
+
         const createdBoard = await db.board.create({
             data: {
                 title
             }
         });
+
+        console.log("createdBoard", createdBoard);
 
         const response: State = {
             success: true,
@@ -41,6 +42,7 @@ export async function CreateBoard(formData: FieldValues) {
 
         return response;
     } catch(error) {
+        console.log("error", error)
         if (error instanceof z.ZodError) {
             const response: State = {
                 error: true,
@@ -54,14 +56,11 @@ export async function CreateBoard(formData: FieldValues) {
 }
 
 export async function DeleteBoard(id: string) {
-    const { organization: activeOrganization } =
-    useOrganization();
-
     await db.board.delete({
         where: {
             id
         }
     });
 
-    revalidatePath(`/organization/${activeOrganization?.id}`)
+    revalidatePath(`/organization`);
 }

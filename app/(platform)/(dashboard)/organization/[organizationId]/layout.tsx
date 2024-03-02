@@ -15,7 +15,12 @@ const ActiveOrganizationLayout: FC<ActiveOrganizationLayoutProps> = ({
   children,
 }) => {
   const { userId } = auth();
-  if(!userId) return <div className="w-full flex justify-center items-center"><Button variant="dark">User not found!</Button></div>
+  
+  if(!userId) return (
+    <div className="w-full flex justify-center items-center">
+      <Button variant="dark">User not found!</Button>
+    </div>
+  )
 
   return (
     <div>

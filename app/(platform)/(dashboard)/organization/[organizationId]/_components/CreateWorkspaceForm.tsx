@@ -35,7 +35,7 @@ const CreateWorkspaceForm:FC<CreateWorkspaceFormProps> = ({
           const payload: BoardFormPayload = {
             title,
           };
-    
+
           try {
             const res = await CreateBoard(payload);
 
