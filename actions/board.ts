@@ -7,6 +7,7 @@ import { FieldValues } from "react-hook-form";
 // Libs
 import { db } from "@/lib/db";
 import {BoardFormValidator} from "@/lib/validation/boardForm";
+import { auth } from "@clerk/nextjs";
 
 export type State = {
     error?: boolean;
@@ -15,21 +16,60 @@ export type State = {
     message: string;
     data?: {
         id: string;
-        title: string
+        title: string;
+        orgId: string;
+        imageId: string;
+        imageThumbUrl: string;
+        imageFullUrl: string;
+        imageLinkHTML: string;
+        imageUserName: string;
     }
 }
 
 export async function CreateBoard(formData: FieldValues) {
+    const { userId, orgId } = auth();
+
+    if (!userId || !orgId) {
+        const response: State = {
+            error: true,
+            status: "404",
+            message: "Unauthorized"
+        }
+
+        return response;
+    }
+
     try {
-        const {title} = BoardFormValidator.parse(formData);
+        const {title, image} = BoardFormValidator.parse(formData);
+        const [
+            imageId,
+            imageThumbUrl,
+            imageFullUrl,
+            imageLinkHTML,
+            imageUserName
+        ] = image?.split("|");
+
+        if (!imageId || !imageThumbUrl || !imageFullUrl || !imageUserName || !imageLinkHTML) {
+            const response: State = {
+                error: true,
+                status: "404",
+                message: "Missing fields. Failed to create board."
+            }
+
+            return response;
+        }
 
         const createdBoard = await db.board.create({
             data: {
-                title
+                title,
+                orgId,
+                imageId,
+                imageThumbUrl,
+                imageFullUrl,
+                imageLinkHTML,
+                imageUserName
             }
         });
-
-        console.log("createdBoard", createdBoard);
 
         const response: State = {
             success: true,
