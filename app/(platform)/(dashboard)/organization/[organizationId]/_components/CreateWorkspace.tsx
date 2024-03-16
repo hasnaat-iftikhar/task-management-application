@@ -1,7 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
+
+// Icons
+import { HelpCircle } from 'lucide-react';
 
 // Components
 import Modal from '@/components/ui/Modal';
+import { Hint } from '@/components/shared/Hint';
 
 // Actions
 import CreateWorkspaceForm from './CreateWorkspaceForm';
@@ -18,6 +22,15 @@ const CreateWorkspace:FC<CreateWorkspaceProps> = () => {
                         <p className='text-black text-[16px] font-medium'>Create new board</p>
                         <p className='text-black text-[14px] font-normal opacity-80'>5 remaining</p>
                     </div>
+                    <Hint
+                        sideOffset={240}
+                        side='right'
+                        description={`
+                            Free Workspaces can have up to 5 open boards. For unlimited boards upgrade this workspace.
+                        `}
+                    >
+                        <HelpCircle className="absolute bottom-2 right-2 h-[14px] w-[14px]" />
+                    </Hint>
                 </div>
             )}
         >
