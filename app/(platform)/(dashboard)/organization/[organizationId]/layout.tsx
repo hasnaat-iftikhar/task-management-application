@@ -1,11 +1,21 @@
 import { FC, ReactNode } from "react";
 import { auth } from "@clerk/nextjs";
 
+import { startCase } from "lodash";
+
 // Components
 import { Button } from "@/components/ui/Button";
 import { Separator } from "@/components/ui/Separator";
 import OrgControl from "./_components/OrgControl";
 import Info from "./_components/Info";
+
+export async function generateMetadata() {
+  const { orgSlug } = auth();
+
+  return {
+    title: startCase(orgSlug || "organization")
+  }
+}
 
 interface ActiveOrganizationLayoutProps {
   children: ReactNode;

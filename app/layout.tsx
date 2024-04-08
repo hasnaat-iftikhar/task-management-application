@@ -1,13 +1,22 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { siteConfig } from "@/config/site";
 
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Xpand | Trello Alternative",
-  description:
-    "Xpand is your key to limitless productivity and seamless teamwork. Our intuitive project management platform helps you organize, prioritize, and achieve like never before.",
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`
+  },
+  description: siteConfig.description,
+  icons: [
+    {
+      url: "/logo.svg",
+      href: "/logo.svg"
+    }
+  ]
 };
 
 export default function RootLayout({
