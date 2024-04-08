@@ -19,8 +19,8 @@ const ActiveOrganizationPage = async () => {
         <div className="grid grid-cols-6 gap-[16px]">
           <CreateWorkspace />
           {
-            boards.map((b: {id: string; title: string}) => (
-              <Board key={b.id} title={b.title} id={b.id} />
+            boards.map((b: {id: string; title: string; imageThumbUrl: string}) => (
+              <Board key={b.id} title={b.title} id={b.id} imageThumbUrl={b.imageThumbUrl} />
             ))
           }
         </div>
